@@ -1,0 +1,21 @@
+@model Product;
+
+@{
+    ViewData["Title"] = "Update";
+}
+
+<h2>Update Product</h2>
+
+<form action="edit" method="post">
+    ID: <input asp-for="ID" class="form-control" readonly /> <br />
+    Category:
+    @Html.DropDownListFor(model => model.CateID, (IEnumerable<SelectListItem>) ViewBag.cate, new { @class =
+    "form-control" })
+    <br />
+    Name: <input asp-for="Name" class="form-control" type="text" /> <br />
+    Price: <input type="number" asp-for="Price" class="form-control" /> <br />
+    Quantity: <input type="number" asp-for="Stock" class="form-control" /> <br />
+
+    <input type="submit" value="Submit" class="btn btn-success" />
+    <a href="/product" class="btn btn-outline-primary">Back</a>
+</form>

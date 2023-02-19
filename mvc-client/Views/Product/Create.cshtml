@@ -1,0 +1,22 @@
+@model Product;
+@* @model dynamic; *@
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<form method="post" action="add">
+    Product Name: <input type="text" asp-for="Name" class="form-control" />
+    <span asp-validation-for="Name" class="text-danger"></span> <br />
+    Product Price: <input type="number" asp-for="Price" class="form-control" />
+    <span asp-validation-for="Price" class="text-danger"></span> <br />
+    Product Quantity: <input type="number" asp-for="Stock" class="form-control" />
+    <span asp-validation-for="Stock" class="text-danger"></span> <br />
+    Category:
+    @Html.DropDownListFor(model => model.CateID, (IEnumerable<SelectListItem>) ViewBag.cate, new { @class =
+    "form-control" })
+    <br>
+
+    <input type="submit" value="Submit" class="btn btn-success" />
+    <a href="/product" class="btn btn-outline-primary">Back</a>
+</form>

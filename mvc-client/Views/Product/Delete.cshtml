@@ -1,0 +1,21 @@
+@model Product;
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h2>Delete Product</h2>
+
+<form action="remove" method="post">
+    ID: <input asp-for="ID" class="form-control" readonly /> <br />
+    Category:
+    @Html.DropDownListFor(model => model.CateID, (IEnumerable<SelectListItem>) ViewBag.cate, new { @class =
+    "form-control", @disabled = "disabled" })
+    <br />
+    Name: <input asp-for="Name" class="form-control" readonly /> <br />
+    Price: <input asp-for="Price" class="form-control" readonly /> <br />
+    Quantity: <input asp-for="Stock" class="form-control" readonly /> <br />
+
+    <input type="submit" value="Delete" class="btn btn-danger" />
+    <a href="/product" class="btn btn-outline-primary">Back</a>
+</form>
