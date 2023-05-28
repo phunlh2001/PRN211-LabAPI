@@ -11,6 +11,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using mvc_client.Helpers;
 using mvc_client.Models;
 
 namespace mvc_client.Controllers
@@ -24,8 +25,8 @@ namespace mvc_client.Controllers
         public ProductController()
         {
             client = new HttpClient();
-            var contenType = new MediaTypeWithQualityHeaderValue("application/json");
-            client.DefaultRequestHeaders.Accept.Add(contenType);
+            var contentType = new MediaTypeWithQualityHeaderValue("application/json");
+            client.DefaultRequestHeaders.Accept.Add(contentType);
             api = "http://localhost:5001/api";
         }
 
@@ -48,12 +49,8 @@ namespace mvc_client.Controllers
 
         public async Task<IEnumerable<Category>> GetCategories()
         {
-            var apiCates = $"{api}/categories";
-            HttpResponseMessage res = await client.GetAsync(apiCates);
-            var data = await res.Content.ReadAsStringAsync();
-
-            var opt = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
-            var list = JsonSerializer.Deserialize<IEnumerable<Category>>(data, opt);
+            // var apiCates = $"{api}/categories";
+            var list = await client.GetApi<IEnumerable<Category>>($"{api}/categories");
             return list;
         }
 
